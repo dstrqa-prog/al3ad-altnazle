@@ -284,7 +284,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold text-purple-200">حصالة التوفير</h3>
-                        <p class="text-xs text-purple-400/80 font-mono">الهدف المطلوب: 250,000 ليرة سورية</p>
+                        <p class="text-xs text-purple-400/80 font-mono">الهدف المطلوب: 350,000 ليرة سورية</p>
                     </div>
                 </div>
                 <button onclick="promptAddMoney()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-bold text-xs shadow-[0_0_15px_rgba(52,211,153,0.4)] hover:shadow-[0_0_25px_rgba(52,211,153,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 border border-emerald-400/40">
@@ -306,7 +306,7 @@
                 <div class="glass-panel p-4 sm:p-5 rounded-xl border border-purple-500/30 text-center">
                     <p class="text-xs text-purple-300/80 mb-2 font-mono">كم متبقي للهدف</p>
                     <div class="flex items-center justify-center gap-2">
-                        <span id="remaining-amount" class="text-3xl sm:text-4xl font-black digital-number text-pink-400">250,000</span>
+                        <span id="remaining-amount" class="text-3xl sm:text-4xl font-black digital-number text-pink-400">350,000</span>
                         <span class="text-xs text-pink-300 font-bold">ل.س</span>
                     </div>
                 </div>
@@ -318,7 +318,7 @@
             </div>
             <div class="flex justify-between text-[11px] text-purple-400/70 mt-2 font-mono">
                 <span id="savings-progress-text">نسبة الإنجاز: 0%</span>
-                <span>الهدف: 250,000 ل.س</span>
+                <span>الهدف: 350,000 ل.س</span>
             </div>
         </div>
 
@@ -546,7 +546,7 @@
         }
 
         // ==================== PIGGY BANK LOGIC ====================
-        const PIGGY_TARGET = 250000;
+        const PIGGY_TARGET = 350000;
         const PIGGY_PASSWORD = "12344321";
 
         function getPiggySaved() {
@@ -598,7 +598,7 @@
             if (newTotal >= PIGGY_TARGET) {
                 triggerConfetti();
                 setTimeout(() => {
-                    showToast("🎉 مبروك! لقد أتممت هدف الـ 250 ألف ليرة سوريه بالكامل!");
+                    showToast("🎉 مبروك! لقد أتممت هدف الـ 350 ألف ليرة سورية بالكامل!");
                 }, 1200);
             }
         }
