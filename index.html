@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العداد التنازلي للليوم المنتظر | 1 سبتمبر 2027</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Tajawal & Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#05040a',
+                        cardBg: 'rgba(18, 10, 32, 0.65)',
+                        neonPurple: '#a855f7',
+                        neonPurpleBright: '#c084fc',
+                        neonPurpleDark: '#581c87',
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                        digital: ['Orbitron', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2.5s ease-in-out infinite alternate',
+                        'rgb-shift': 'rgbShift 6s linear infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(168, 85, 247, 0.4), inset 0 0 15px rgba(168, 85, 247, 0.2)' },
+                            '100%': { boxShadow: '0 0 35px rgba(192, 132, 252, 0.8), inset 0 0 25px rgba(192, 132, 252, 0.4)' },
+                        },
+                        rgbShift: {
+                            '0%': { filter: 'hue-rotate(0deg)' },
+                            '100%': { filter: 'hue-rotate(360deg)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar & futuristic styling */
+        body {
+            background-color: #05040a;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* Glowing Text FX */
+        .neon-text-purple {
+            color: #e9d5ff;
+            text-shadow: 0 0 7px #a855f7, 0 0 15px #a855f7, 0 0 30px #7e22ce, 0 0 50px #6b21a8;
+        }
+
+        .neon-text-rgb {
+            background: linear-[#a855f7,#ec4899,#3b82f6];
+            background: linear-gradient(90deg, #c084fc, #f472b6, #60a5fa, #c084fc);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 4s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Border RGB Glow Gradient Animation */
+        .rgb-border-box {
+            position: relative;
+            border-radius: 1.25rem;
+            background: rgba(12, 6, 24, 0.75);
+            backdrop-filter: blur(16px);
+        }
+
+        .rgb-border-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #a855f7, #ec4899, #8b5cf6, #3b82f6, #a855f7);
+            background-size: 400%;
+            z-index: -1;
+            border-radius: 1.35rem;
+            animation: steam 12s linear infinite;
+            opacity: 0.85;
+        }
+
+        .rgb-border-box::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #a855f7, #ec4899, #8b5cf6, #3b82f6, #a855f7);
+            background-size: 400%;
+            z-index: -2;
+            border-radius: 1.35rem;
+            animation: steam 12s linear infinite;
+            filter: blur(15px);
+            opacity: 0.6;
+        }
+
+        @keyframes steam {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        /* Floating background grid */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(168, 85, 247, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(168, 85, 247, 0.07) 1px, transparent 1px);
+        }
+
+        /* Glassmorphic Panel */
+        .glass-panel {
+            background: rgba(22, 10, 40, 0.55);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Custom Digital Number styling */
+        .digital-number {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between items-center selection:bg-purple-600 selection:text-white">
+
+    <!-- Particle Background Canvas -->
+    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    
+    <!-- Cyber Grid Overlay -->
+    <div class="fixed inset-0 cyber-grid pointer-events-none z-0 opacity-80"></div>
+    
+    <!-- Ambient Radial Glows -->
+    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/30 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-10 right-10 w-[350px] h-[350px] bg-pink-900/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="w-full max-w-6xl px-6 py-6 z-10 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-900/50 border border-purple-500/50 flex items-center justify-center text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+                <i class="fa-solid font-bold fa-hourglass-half text-lg animate-spin" style="animation-duration: 8s;"></i>
+            </div>
+            <div>
+                <h1 class="font-black text-xl tracking-wider text-purple-200">العدّ التنازلي الكبير</h1>
+                <p class="text-xs text-purple-400/80 font-mono">TARGET: 2027-09-01 T00:00:00 UTC</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-3">
+            <!-- Time Synchronization Badge -->
+            <div id="sync-status" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/30 text-[11px] text-purple-300 font-mono">
+                <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
+                <span id="sync-text">جارٍ مزامنة الوقت العالمي...</span>
+            </div>
+
+            <button id="sound-btn" onclick="toggleMusic()" class="px-4 py-2 rounded-xl glass-panel text-xs text-purple-300 hover:text-white hover:border-purple-400 transition-all duration-300 flex items-center gap-2">
+                <i id="sound-icon" class="fa-solid fa-music text-purple-400"></i>
+                <span id="sound-text">موسيقى هادئة</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="w-full max-w-5xl px-4 py-6 z-10 flex flex-col items-center justify-center my-auto">
+        
+        <!-- Main Title Header -->
+        <div class="text-center mb-8 animate-float">
+            <!-- Mobile sync status indicator -->
+            <div id="sync-status-mobile" class="sm:hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 text-[10px] text-purple-300 font-mono mb-3">
+                <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
+                <span id="sync-text-mobile">جارٍ مزامنة الوقت العالمي...</span>
+            </div>
+            <br sm:hidden>
+            <span class="inline-block px-4 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-4 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+                ✨ اليوم الموعود المنتظر بفارغ الصبر ✨
+            </span>
+            <h2 class="text-4xl sm:text-6xl md:text-7xl font-black mb-3 neon-text-purple tracking-tight leading-tight">
+                1 سبتمبر 2027
+            </h2>
+            <p class="text-gray-400 text-sm sm:text-base max-w-md mx-auto">
+                كل ثانية تمضي تقرّبنا أكثر من هذه اللحظة الاستثنائية! 🚀💜
+            </p>
+        </div>
+
+        <!-- MAIN RGB COUNTDOWN GRID -->
+        <div class="w-full max-w-4xl rgb-border-box p-6 sm:p-8 mb-10">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
+                
+                <!-- YEARS -->
+                <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-center items-center group hover:scale-105 transition-transform duration-300 border-purple-500/30 hover:border-purple-400">
+                    <span id="years" class="text-4xl sm:text-5xl font-black digital-number text-purple-300 neon-text-purple">00</span>
+                    <span class="text-xs sm:text-sm font-bold text-purple-400/90 mt-2">سنة</span>
+                </div>
+
+                <!-- MONTHS -->
+                <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-center items-center group hover:scale-105 transition-transform duration-300 border-purple-500/30 hover:border-purple-400">
+                    <span id="months" class="text-4xl sm:text-5xl font-black digital-number text-purple-300 neon-text-purple">00</span>
+                    <span class="text-xs sm:text-sm font-bold text-purple-400/90 mt-2">شهر</span>
+                </div>
+
+                <!-- DAYS -->
+                <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-center items-center group hover:scale-105 transition-transform duration-300 border-purple-500/30 hover:border-purple-400">
+                    <span id="days" class="text-4xl sm:text-5xl font-black digital-number text-purple-300 neon-text-purple">00</span>
+                    <span class="text-xs sm:text-sm font-bold text-purple-400/90 mt-2">يوم</span>
+                </div>
+
+                <!-- HOURS -->
+                <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-center items-center group hover:scale-105 transition-transform duration-300 border-purple-500/30 hover:border-purple-400">
+                    <span id="hours" class="text-4xl sm:text-5xl font-black digital-number text-purple-300 neon-text-purple">00</span>
+                    <span class="text-xs sm:text-sm font-bold text-purple-400/90 mt-2">ساعة</span>
+                </div>
+
+                <!-- MINUTES -->
+                <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-center items-center group hover:scale-105 transition-transform duration-300 border-purple-500/30 hover:border-purple-400">
+                    <span id="minutes" class="text-4xl sm:text-5xl font-black digital-number text-purple-300 neon-text-purple">00</span>
+                    <span class="text-xs sm:text-sm font-bold text-purple-400/90 mt-2">دقيقة</span>
+                </div>
+
+                <!-- SECONDS -->
+                <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-center items-center group hover:scale-105 transition-transform duration-300 border-purple-500/30 hover:border-pink-400 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-purple-600/10 animate-pulse"></div>
+                    <span id="seconds" class="text-4xl sm:text-5xl font-black digital-number text-pink-400 neon-text-rgb relative z-10">00</span>
+                    <span class="text-xs sm:text-sm font-bold text-pink-300 mt-2 relative z-10">ثانية</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TOTAL LIVE SECONDS DISPLAY -->
+        <div class="w-full max-w-2xl glass-panel rounded-2xl p-6 mb-8 text-center border border-purple-500/40 relative overflow-hidden group">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-purple-600/20 rounded-full blur-2xl group-hover:bg-purple-600/40 transition-all"></div>
+            
+            <p class="text-xs sm:text-sm text-purple-300/80 mb-2 font-mono uppercase tracking-widest">
+                <i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> إجمالي الثواني المتبقية الحية
+            </p>
+            
+            <div class="flex items-center justify-center gap-2">
+                <span id="total-seconds" class="text-3xl sm:text-5xl font-black digital-number neon-text-rgb tracking-wider">
+                    000,000,000
+                </span>
+                <span class="text-purple-400 text-sm font-bold">ثانية</span>
+            </div>
+            
+            <!-- Dynamic Progress Bar -->
+            <div class="w-full bg-purple-950/60 rounded-full h-3 mt-6 p-0.5 border border-purple-800/40">
+                <div id="progress-bar" class="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-500 rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(168,85,247,0.8)]" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-[11px] text-purple-400/70 mt-2 font-mono">
+                <span id="progress-text">النسبة المكتملة: 0%</span>
+                <span>الهدف: 100%</span>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE BUTTONS & CELEBRATION EFFECTS -->
+        <div class="flex flex-wrap items-center justify-center gap-4">
+            <button onclick="triggerConfetti()" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-800 text-white font-bold text-sm shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:shadow-[0_0_30px_rgba(168,85,247,0.8)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 border border-purple-400/40">
+                <i class="fa-solid fa-wand-magic-sparkles text-pink-300"></i>
+                <span>إطلاق ألعاب نارية بنفسجية! 🎉</span>
+            </button>
+            <button onclick="shareCountdown()" class="px-6 py-3.5 rounded-xl glass-panel hover:bg-purple-900/40 text-purple-200 font-bold text-sm border border-purple-500/40 hover:border-purple-400 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
+                <i class="fa-solid fa-share-nodes text-purple-400"></i>
+                <span id="share-btn-text">مشاركة العداد 🚀</span>
+            </button>
+        </div>
+
+        <!-- Custom Toast Notification -->
+        <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 glass-panel border border-purple-500 text-purple-200 px-6 py-3 rounded-xl shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-3">
+            <i class="fa-solid fa-check-circle text-green-400 text-lg"></i>
+            <span id="toast-message" class="text-sm font-semibold">تم نسخ الرابط بنجاح!</span>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-6 border-t border-purple-900/30 z-10 text-xs text-purple-400/60 font-mono">
+        <p>مصمم بلمسات RGB سيبيربانك بنفسجية سوداء 💜 | 2027/9/1 Countdown</p>
+    </footer>
+
+    <!-- Audio Synth Logic -->
+    <script>
+        // Web Audio API Background Synth Pad
+        let audioCtx = null;
+        let isMusicPlaying = false;
+        let masterGain = null;
+        let osc1, osc2, lfo;
+
+        function toggleMusic() {
+            const btnText = document.getElementById('sound-text');
+            const btnIcon = document.getElementById('sound-icon');
+
+            if (!isMusicPlaying) {
+                try {
+                    if (!audioCtx) {
+                        const AudioContext = window.AudioContext || window.webkitAudioContext;
+                        audioCtx = new AudioContext();
+                    }
+
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+
+                    // Create Ambient Synth Pad
+                    masterGain = audioCtx.createGain();
+                    masterGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+
+                    // Dual Oscillators for rich ambient purple synth sound
+                    osc1 = audioCtx.createOscillator();
+                    osc2 = audioCtx.createOscillator();
+
+                    osc1.type = 'sine';
+                    osc2.type = 'triangle';
+
+                    // Deep A Minor Ambient Chord Frequencies
+                    osc1.frequency.setValueAtTime(110, audioCtx.currentTime); // A2
+                    osc2.frequency.setValueAtTime(164.81, audioCtx.currentTime); // E3
+
+                    // Filter for warmth
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(400, audioCtx.currentTime);
+
+                    osc1.connect(filter);
+                    osc2.connect(filter);
+                    filter.connect(masterGain);
+                    masterGain.connect(audioCtx.destination);
+
+                    osc1.start();
+                    osc2.start();
+
+                    isMusicPlaying = true;
+                    btnText.innerText = "إيقاف الموسيقى";
+                    btnIcon.className = "fa-solid fa-volume-high text-pink-400 animate-pulse";
+                    showToast("تم تشغيل خلفية الساوندتراك البنفسجية ✨");
+                } catch (e) {
+                    console.error(e);
+                    showToast("الصوت غير مدعوم على متصفحك بشكل مباشر");
+                }
+            } else {
+                if (masterGain) {
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+                    setTimeout(() => {
+                        if (osc1) osc1.stop();
+                        if (osc2) osc2.stop();
+                    }, 1000);
+                }
+                isMusicPlaying = false;
+                btnText.innerText = "موسيقى هادئة";
+                btnIcon.className = "fa-solid fa-music text-purple-400";
+                showToast("تم إيقاف الموسيقى");
+            }
+        }
+    </script>
+
+    <!-- Main Logic Script -->
+    <script>
+        // Target Date: September 1, 2027 00:00:00 UTC
+        const TARGET_DATE = Date.UTC(2027, 8, 1, 0, 0, 0); // Month is 0-indexed (8 = September)
+        const START_DATE = Date.UTC(2024, 0, 1, 0, 0, 0);
+
+        // Server Time Offset relative to performance.now()
+        let serverTimeOffset = 0;
+        let isTimeSynced = false;
+
+        // Fetch Global Real Network Time (UTC) to avoid device clock inaccuracies
+        async function fetchGlobalTime() {
+            const updateSyncUI = (status, textClass, dotClass) => {
+                const textNodes = [document.getElementById("sync-text"), document.getElementById("sync-text-mobile")];
+                textNodes.forEach(node => {
+                    if (node) node.innerText = status;
+                });
+            };
+
+            try {
+                const startTime = performance.now();
+                // Primary API: WorldTimeAPI
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC', { cache: 'no-store' });
+                if (!res.ok) throw new Error('Primary API failed');
+                const data = await res.json();
+                
+                const endTime = performance.now();
+                const latency = (endTime - startTime) / 2;
+                const networkNow = new Date(data.utc_datetime).getTime() + latency;
+                
+                // Offset between precise Network Time and local performance timestamp
+                serverTimeOffset = networkNow - performance.now();
+                isTimeSynced = true;
+
+                updateSyncUI("تم التزامن مع الوقت العالمي (UTC) 🌐");
+                showToast("تم مزامنة العداد مع السيرفر العالمي بنجاح! ⏱️");
+            } catch (err) {
+                console.warn("Retrying time sync with secondary API...", err);
+                try {
+                    const startTime = performance.now();
+                    // Fallback API: TimeAPI.io
+                    const res2 = await fetch('https://timeapi.io/api/v1/time/current/zone?timeZone=UTC', { cache: 'no-store' });
+                    if (!res2.ok) throw new Error('Fallback API failed');
+                    const data2 = await res2.json();
+                    
+                    const endTime = performance.now();
+                    const latency = (endTime - startTime) / 2;
+                    const networkNow = new Date(data2.dateTime + "Z").getTime() + latency;
+                    
+                    serverTimeOffset = networkNow - performance.now();
+                    isTimeSynced = true;
+
+                    updateSyncUI("تم التزامن مع الوقت العالمي (UTC) 🌐");
+                    showToast("تم مزامنة العداد بنجاح عبر السيرفر الاحتياطي! ⏱️");
+                } catch (e2) {
+                    console.error("All Time APIs failed, using device clock as last resort", e2);
+                    serverTimeOffset = Date.now() - performance.now();
+                    updateSyncUI("تعذر جلب UTC (يعمل بساعة الجهاز)");
+                }
+            }
+        }
+
+        function getAccurateNow() {
+            if (isTimeSynced || serverTimeOffset !== 0) {
+                return performance.now() + serverTimeOffset;
+            }
+            return Date.now();
+        }
+
+        function padZero(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        function formatNumberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function updateCountdown() {
+            const now = getAccurateNow();
+            const distance = TARGET_DATE - now;
+
+            if (distance <= 0) {
+                document.getElementById("years").innerText = "00";
+                document.getElementById("months").innerText = "00";
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                document.getElementById("total-seconds").innerText = "0";
+                document.getElementById("progress-bar").style.width = "100%";
+                document.getElementById("progress-text").innerText = "النسبة المكتملة: 100%";
+                
+                triggerConfetti();
+                return;
+            }
+
+            // Total live seconds
+            const totalSecs = Math.floor(distance / 1000);
+
+            // Time Calculations
+            const years = Math.floor(totalSecs / (365.25 * 24 * 3600));
+            const remainingSecsAfterYears = totalSecs % Math.floor(365.25 * 24 * 3600);
+
+            const months = Math.floor(remainingSecsAfterYears / (30.4375 * 24 * 3600));
+            const remainingSecsAfterMonths = remainingSecsAfterYears % Math.floor(30.4375 * 24 * 3600);
+
+            const days = Math.floor(remainingSecsAfterMonths / (24 * 3600));
+            const hours = Math.floor((remainingSecsAfterMonths % (24 * 3600)) / 3600);
+            const minutes = Math.floor((remainingSecsAfterMonths % 3600) / 60);
+            const seconds = Math.floor(remainingSecsAfterMonths % 60);
+
+            // Render into DOM
+            document.getElementById("years").innerText = padZero(years);
+            document.getElementById("months").innerText = padZero(months);
+            document.getElementById("days").innerText = padZero(days);
+            document.getElementById("hours").innerText = padZero(hours);
+            document.getElementById("minutes").innerText = padZero(minutes);
+            document.getElementById("seconds").innerText = padZero(seconds);
+            
+            // Total seconds display
+            document.getElementById("total-seconds").innerText = formatNumberWithCommas(totalSecs);
+
+            // Progress bar calculation
+            const totalDuration = TARGET_DATE - START_DATE;
+            const elapsed = now - START_DATE;
+            let percentage = (elapsed / totalDuration) * 100;
+            if (percentage < 0) percentage = 0;
+            if (percentage > 100) percentage = 100;
+
+            document.getElementById("progress-bar").style.width = percentage.toFixed(2) + "%";
+            document.getElementById("progress-text").innerText = `النسبة المكتملة: ${percentage.toFixed(4)}%`;
+        }
+
+        // Confetti Fireworks Generator with Purple Theme
+        function triggerConfetti() {
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 }
+            };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio),
+                    colors: ['#a855f7', '#c084fc', '#e879f9', '#ec4899', '#3b82f6', '#ffffff']
+                }));
+            }
+
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            });
+            fire(0.2, {
+                spread: 60,
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
+        }
+
+        // Toast Notification System
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            const toastMsg = document.getElementById("toast-message");
+            toastMsg.innerText = msg;
+
+            toast.classList.remove("opacity-0", "pointer-events-none");
+            toast.classList.add("opacity-100");
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove("opacity-100");
+                toast.classList.add("opacity-0", "pointer-events-none");
+            }, 3000);
+        }
+
+        // Share Link functionality
+        function shareCountdown() {
+            const tempInput = document.createElement('input');
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast("تم نسخ رابط العداد بنجاح! شاركه مع أصدقائك 🎉");
+        }
+
+        // Floating Purple Particles Background (Canvas)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.color = ['#a855f7', '#c084fc', '#ec4899', '#7e22ce'][Math.floor(Math.random() * 4)];
+                this.alpha = Math.random() * 0.7 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = 10;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            const particleCount = Math.min(Math.floor(window.innerWidth / 15), 70);
+            for (let i = 0; i < particleCount; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Initialize App on Window Load
+        window.onload = function () {
+            fetchGlobalTime();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Re-sync with network every 5 minutes to maintain precision
+            setInterval(fetchGlobalTime, 5 * 60 * 1000);
+            
+            initParticles();
+            animateParticles();
+        };
+    </script>
+</body>
+</html>
