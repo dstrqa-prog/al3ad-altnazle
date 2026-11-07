@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>العداد التنازلي للليوم المنتظر | 1 سبتمبر 2027</title>
+    <title>العداد التنازلي للليوم المنتظر والحصالة | 1 سبتمبر 2027</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Tajawal & Orbitron -->
@@ -56,7 +56,6 @@
     </script>
 
     <style>
-        /* Custom scrollbar & futuristic styling */
         body {
             background-color: #05040a;
             color: #ffffff;
@@ -64,14 +63,12 @@
             font-family: 'Tajawal', sans-serif;
         }
 
-        /* Glowing Text FX */
         .neon-text-purple {
             color: #e9d5ff;
             text-shadow: 0 0 7px #a855f7, 0 0 15px #a855f7, 0 0 30px #7e22ce, 0 0 50px #6b21a8;
         }
 
         .neon-text-rgb {
-            background: linear-[#a855f7,#ec4899,#3b82f6];
             background: linear-gradient(90deg, #c084fc, #f472b6, #60a5fa, #c084fc);
             background-size: 300% 100%;
             -webkit-background-clip: text;
@@ -85,7 +82,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Border RGB Glow Gradient Animation */
         .rgb-border-box {
             position: relative;
             border-radius: 1.25rem;
@@ -130,7 +126,6 @@
             100% { background-position: 0 0; }
         }
 
-        /* Floating background grid */
         .cyber-grid {
             background-size: 40px 40px;
             background-image: 
@@ -138,7 +133,6 @@
                 linear-gradient(to bottom, rgba(168, 85, 247, 0.07) 1px, transparent 1px);
         }
 
-        /* Glassmorphic Panel */
         .glass-panel {
             background: rgba(22, 10, 40, 0.55);
             backdrop-filter: blur(12px);
@@ -146,7 +140,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
-        /* Custom Digital Number styling */
         .digital-number {
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
@@ -172,13 +165,12 @@
                 <i class="fa-solid font-bold fa-hourglass-half text-lg animate-spin" style="animation-duration: 8s;"></i>
             </div>
             <div>
-                <h1 class="font-black text-xl tracking-wider text-purple-200">العدّ التنازلي الكبير</h1>
+                <h1 class="font-black text-xl tracking-wider text-purple-200">العدّ التنازلي الكبير والحصالة</h1>
                 <p class="text-xs text-purple-400/80 font-mono">TARGET: 2027-09-01 T00:00:00 UTC</p>
             </div>
         </div>
         
         <div class="flex items-center gap-3">
-            <!-- Time Synchronization Badge -->
             <div id="sync-status" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/30 text-[11px] text-purple-300 font-mono">
                 <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
                 <span id="sync-text">جارٍ مزامنة الوقت العالمي...</span>
@@ -196,7 +188,6 @@
         
         <!-- Main Title Header -->
         <div class="text-center mb-8 animate-float">
-            <!-- Mobile sync status indicator -->
             <div id="sync-status-mobile" class="sm:hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 text-[10px] text-purple-300 font-mono mb-3">
                 <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
                 <span id="sync-text-mobile">جارٍ المزامنة مع الوقت العالمي...</span>
@@ -209,12 +200,12 @@
                 1 سبتمبر 2027
             </h2>
             <p class="text-gray-400 text-sm sm:text-base max-w-md mx-auto">
-                رحلة العد التنازلي الانطلاقية (من 7 نوفمبر 2026 12:40 PM إلى 1 سبتمبر 2027) 🚀💜
+                رحلة العد التنازلي الانطلاقية وإدارة الحصالة المالية 🚀💜
             </p>
         </div>
 
         <!-- MAIN RGB COUNTDOWN GRID -->
-        <div class="w-full max-w-4xl rgb-border-box p-6 sm:p-8 mb-10">
+        <div class="w-full max-w-4xl rgb-border-box p-6 sm:p-8 mb-8">
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
                 
                 <!-- YEARS -->
@@ -258,7 +249,7 @@
         </div>
 
         <!-- TOTAL LIVE SECONDS DISPLAY -->
-        <div class="w-full max-w-2xl glass-panel rounded-2xl p-6 mb-8 text-center border border-purple-500/40 relative overflow-hidden group">
+        <div class="w-full max-w-4xl glass-panel rounded-2xl p-6 mb-8 text-center border border-purple-500/40 relative overflow-hidden group">
             <div class="absolute -right-10 -top-10 w-32 h-32 bg-purple-600/20 rounded-full blur-2xl group-hover:bg-purple-600/40 transition-all"></div>
             
             <p class="text-xs sm:text-sm text-purple-300/80 mb-2 font-mono uppercase tracking-widest">
@@ -277,8 +268,57 @@
                 <div id="progress-bar" class="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-500 rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(168,85,247,0.8)]" style="width: 0%"></div>
             </div>
             <div class="flex justify-between text-[11px] text-purple-400/70 mt-2 font-mono">
-                <span id="progress-text">النسبة المكتملة: 0%</span>
+                <span id="progress-text">النسبة المكتملة للوقت: 0%</span>
                 <span>الهدف: 100%</span>
+            </div>
+        </div>
+
+        <!-- ==================== الحصالة (PIGGY BANK SECTION) ==================== -->
+        <div class="w-full max-w-4xl glass-panel rounded-2xl p-6 sm:p-8 mb-8 border border-purple-500/40 relative overflow-hidden group">
+            <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-pink-600/20 rounded-full blur-2xl group-hover:bg-pink-600/40 transition-all"></div>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-pink-900/50 border border-pink-500/50 flex items-center justify-center text-pink-300 shadow-[0_0_15px_rgba(236,72,153,0.4)]">
+                        <i class="fa-solid fa-piggy-bank text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-purple-200">حصالة التوفير</h3>
+                        <p class="text-xs text-purple-400/80 font-mono">الهدف المطلوب: 250,000 ليرة سورية</p>
+                    </div>
+                </div>
+                <button onclick="promptAddMoney()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-bold text-xs shadow-[0_0_15px_rgba(52,211,153,0.4)] hover:shadow-[0_0_25px_rgba(52,211,153,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 border border-emerald-400/40">
+                    <i class="fa-solid fa-plus-circle text-emerald-200"></i>
+                    <span>إضافة مبلغ جديد 🪙</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <!-- Current Saved -->
+                <div class="glass-panel p-4 sm:p-5 rounded-xl border border-purple-500/30 text-center">
+                    <p class="text-xs text-purple-300/80 mb-2 font-mono">كم معي (المبلغ المتوفر حالياً)</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <span id="saved-amount" class="text-3xl sm:text-4xl font-black digital-number text-emerald-400">0</span>
+                        <span class="text-xs text-emerald-300 font-bold">ل.س</span>
+                    </div>
+                </div>
+                <!-- Remaining -->
+                <div class="glass-panel p-4 sm:p-5 rounded-xl border border-purple-500/30 text-center">
+                    <p class="text-xs text-purple-300/80 mb-2 font-mono">كم متبقي للهدف</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <span id="remaining-amount" class="text-3xl sm:text-4xl font-black digital-number text-pink-400">250,000</span>
+                        <span class="text-xs text-pink-300 font-bold">ل.س</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Savings Progress Bar -->
+            <div class="w-full bg-purple-950/60 rounded-full h-3 p-0.5 border border-purple-800/40">
+                <div id="savings-progress-bar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-pink-500 rounded-full transition-all duration-700 shadow-[0_0_12px_rgba(52,211,153,0.8)]" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-[11px] text-purple-400/70 mt-2 font-mono">
+                <span id="savings-progress-text">نسبة الإنجاز: 0%</span>
+                <span>الهدف: 250,000 ل.س</span>
             </div>
         </div>
 
@@ -297,23 +337,22 @@
         <!-- Custom Toast Notification -->
         <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 glass-panel border border-purple-500 text-purple-200 px-6 py-3 rounded-xl shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-3">
             <i class="fa-solid fa-check-circle text-green-400 text-lg"></i>
-            <span id="toast-message" class="text-sm font-semibold">تم نسخ الرابط بنجاح!</span>
+            <span id="toast-message" class="text-sm font-semibold">تم بنجاح!</span>
         </div>
 
     </main>
 
     <!-- Footer -->
     <footer class="w-full text-center py-6 border-t border-purple-900/30 z-10 text-xs text-purple-400/60 font-mono">
-        <p>مصمم بلمسات RGB سيبيربانك بنفسجية سوداء 💜 | 2027/9/1 Countdown</p>
+        <p>مصمم بلمسات RGB سيبيربانك بنفسجية سوداء 💜 | 2027/9/1 Countdown & Piggy Bank</p>
     </footer>
 
     <!-- Audio Synth Logic -->
     <script>
-        // Web Audio API Background Synth Pad
         let audioCtx = null;
         let isMusicPlaying = false;
         let masterGain = null;
-        let osc1, osc2, lfo;
+        let osc1, osc2;
 
         function toggleMusic() {
             const btnText = document.getElementById('sound-text');
@@ -330,22 +369,18 @@
                         audioCtx.resume();
                     }
 
-                    // Create Ambient Synth Pad
                     masterGain = audioCtx.createGain();
                     masterGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
 
-                    // Dual Oscillators for rich ambient purple synth sound
                     osc1 = audioCtx.createOscillator();
                     osc2 = audioCtx.createOscillator();
 
                     osc1.type = 'sine';
                     osc2.type = 'triangle';
 
-                    // Deep A Minor Ambient Chord Frequencies
-                    osc1.frequency.setValueAtTime(110, audioCtx.currentTime); // A2
-                    osc2.frequency.setValueAtTime(164.81, audioCtx.currentTime); // E3
+                    osc1.frequency.setValueAtTime(110, audioCtx.currentTime);
+                    osc2.frequency.setValueAtTime(164.81, audioCtx.currentTime);
 
-                    // Filter for warmth
                     const filter = audioCtx.createBiquadFilter();
                     filter.type = 'lowpass';
                     filter.frequency.setValueAtTime(400, audioCtx.currentTime);
@@ -382,19 +417,13 @@
         }
     </script>
 
-    <!-- Main Logic Script -->
+    <!-- Main Countdown & Piggy Bank Logic Script -->
     <script>
-        // Target Date: September 1, 2027 00:00:00 UTC+3 (2027-08-31 21:00:00 UTC)
         const TARGET_DATE = Date.UTC(2027, 8, 1, 0, 0, 0) - (3 * 3600 * 1000); 
-        
-        // Fixed Baseline Start Date: November 7, 2026 12:40:00 UTC+3
         const START_DATE = Date.UTC(2026, 10, 7, 12, 40, 0) - (3 * 3600 * 1000);
 
-        // Server Time Offset relative to performance.now()
         let serverTimeOffset = 0;
-        let isTimeSynced = false;
 
-        // Multi-Source HTTPS Global UTC Time Fetcher optimized for GitHub Pages
         async function fetchGlobalTime() {
             const updateSyncUI = (status, isSuccess = true) => {
                 const textNodes = [document.getElementById("sync-text"), document.getElementById("sync-text-mobile")];
@@ -410,7 +439,6 @@
                 });
             };
 
-            // Array of reliable HTTPS Time Endpoints & HTTP Head Checks
             const timeSources = [
                 async () => {
                     const t0 = performance.now();
@@ -429,7 +457,6 @@
                     return new Date(data.utc_datetime).getTime() + roundtrip;
                 },
                 async () => {
-                    // Fallback to Header Date from GitHub Pages / Fast HTTP Server Response
                     const t0 = performance.now();
                     const res = await fetch(window.location.href, { method: 'HEAD', cache: 'no-store' });
                     const serverDateHeader = res.headers.get('date');
@@ -443,7 +470,6 @@
                 try {
                     const accurateUtcTimestamp = await source();
                     serverTimeOffset = accurateUtcTimestamp - performance.now();
-                    isTimeSynced = true;
                     updateSyncUI("دقة زمنية موثقة عبر UTC 🌐", true);
                     return;
                 } catch (e) {
@@ -451,7 +477,6 @@
                 }
             }
 
-            // Ultimate fallback if no internet connection available
             serverTimeOffset = Date.now() - performance.now();
             updateSyncUI("توقيت متصل عالمياً ⚡", true);
         }
@@ -484,16 +509,12 @@
                 document.getElementById("seconds").innerText = "00";
                 document.getElementById("total-seconds").innerText = "0";
                 document.getElementById("progress-bar").style.width = "100%";
-                document.getElementById("progress-text").innerText = "النسبة المكتملة: 100%";
-                
-                triggerConfetti();
+                document.getElementById("progress-text").innerText = "النسبة المكتملة للوقت: 100%";
                 return;
             }
 
-            // Total live seconds remaining
             const totalSecs = Math.floor(distance / 1000);
 
-            // Time Breakdown Calculations
             const years = Math.floor(totalSecs / (365.25 * 24 * 3600));
             const remainingSecsAfterYears = totalSecs % Math.floor(365.25 * 24 * 3600);
 
@@ -505,7 +526,6 @@
             const minutes = Math.floor((remainingSecsAfterMonths % 3600) / 60);
             const seconds = Math.floor(remainingSecsAfterMonths % 60);
 
-            // Render into DOM
             document.getElementById("years").innerText = padZero(years);
             document.getElementById("months").innerText = padZero(months);
             document.getElementById("days").innerText = padZero(days);
@@ -513,10 +533,8 @@
             document.getElementById("minutes").innerText = padZero(minutes);
             document.getElementById("seconds").innerText = padZero(seconds);
             
-            // Total seconds display
             document.getElementById("total-seconds").innerText = formatNumberWithCommas(totalSecs);
 
-            // Progress bar calculation starting specifically from 2026/11/07 12:40 PM UTC+3 to 2027/09/01
             const totalDuration = TARGET_DATE - START_DATE;
             const elapsed = now - START_DATE;
             let percentage = (elapsed / totalDuration) * 100;
@@ -524,10 +542,68 @@
             if (percentage > 100) percentage = 100;
 
             document.getElementById("progress-bar").style.width = percentage.toFixed(3) + "%";
-            document.getElementById("progress-text").innerText = `النسبة المكتملة: ${percentage.toFixed(4)}%`;
+            document.getElementById("progress-text").innerText = `النسبة المكتملة للوقت: ${percentage.toFixed(4)}%`;
         }
 
-        // Confetti Fireworks Generator with Purple Theme
+        // ==================== PIGGY BANK LOGIC ====================
+        const PIGGY_TARGET = 250000;
+        const PIGGY_PASSWORD = "12344321";
+
+        function getPiggySaved() {
+            const saved = localStorage.getItem('dstr_piggy_saved');
+            return saved ? parseFloat(saved) : 0;
+        }
+
+        function setPiggySaved(amount) {
+            localStorage.setItem('dstr_piggy_saved', amount);
+            updatePiggyUI();
+        }
+
+        function updatePiggyUI() {
+            const current = getPiggySaved();
+            const remaining = Math.max(0, PIGGY_TARGET - current);
+            let percentage = (current / PIGGY_TARGET) * 100;
+            if (percentage > 100) percentage = 100;
+
+            document.getElementById("saved-amount").innerText = formatNumberWithCommas(current);
+            document.getElementById("remaining-amount").innerText = formatNumberWithCommas(remaining);
+            document.getElementById("savings-progress-bar").style.width = percentage.toFixed(2) + "%";
+            document.getElementById("savings-progress-text").innerText = `نسبة الإنجاز: ${percentage.toFixed(1)}%`;
+        }
+
+        function promptAddMoney() {
+            const enteredPassword = prompt("🔐 أدخل كلمة المرور الخاصة بالحصالة:");
+            if (enteredPassword === null) return; // Cancelled
+
+            if (enteredPassword !== PIGGY_PASSWORD) {
+                showToast("❌ كلمة المرور غير صحيحة!");
+                return;
+            }
+
+            const amountStr = prompt("💰 أدخل المبلغ المراد إضافته (بالليرة السورية):");
+            if (amountStr === null) return;
+
+            const addAmount = parseFloat(amountStr);
+            if (isNaN(addAmount) || addAmount <= 0) {
+                showToast("❌ يرجى إدخال مبلغ صحيح أكبر من الصفر!");
+                return;
+            }
+
+            const current = getPiggySaved();
+            const newTotal = current + addAmount;
+            setPiggySaved(newTotal);
+
+            showToast(`✅ تمت إضافة ${formatNumberWithCommas(addAmount)} ل.س بنجاح!`);
+
+            if (newTotal >= PIGGY_TARGET) {
+                triggerConfetti();
+                setTimeout(() => {
+                    showToast("🎉 مبروك! لقد أتممت هدف الـ 250 ألف ليرة سوريه بالكامل!");
+                }, 1200);
+            }
+        }
+
+        // Confetti Fireworks Generator
         function triggerConfetti() {
             const count = 200;
             const defaults = { origin: { y: 0.7 } };
@@ -535,7 +611,7 @@
             function fire(particleRatio, opts) {
                 confetti(Object.assign({}, defaults, opts, {
                     particleCount: Math.floor(count * particleRatio),
-                    colors: ['#a855f7', '#c084fc', '#e879f9', '#ec4899', '#3b82f6', '#ffffff']
+                    colors: ['#a855f7', '#c084fc', '#e879f9', '#ec4899', '#3b82f6', '#34d399', '#ffffff']
                 }));
             }
 
@@ -546,7 +622,6 @@
             fire(0.1, { spread: 120, startVelocity: 45 });
         }
 
-        // Toast Notification System
         let toastTimeout;
         function showToast(msg) {
             const toast = document.getElementById("toast");
@@ -560,10 +635,9 @@
             toastTimeout = setTimeout(() => {
                 toast.classList.remove("opacity-100");
                 toast.classList.add("opacity-0", "pointer-events-none");
-            }, 3000);
+            }, 3500);
         }
 
-        // Share Link functionality
         function shareCountdown() {
             const tempInput = document.createElement('input');
             tempInput.value = window.location.href;
@@ -571,11 +645,10 @@
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-
-            showToast("تم نسخ رابط العداد بنجاح! 🚀");
+            showToast("تم نسخ رابط الصفحة بنجاح! 🚀");
         }
 
-        // Floating Purple Particles Background (Canvas)
+        // Background Particles Canvas
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -594,7 +667,7 @@
                 this.size = Math.random() * 2.5 + 0.5;
                 this.speedX = (Math.random() - 0.5) * 0.5;
                 this.speedY = (Math.random() - 0.5) * 0.5;
-                this.color = ['#a855f7', '#c084fc', '#ec4899', '#7e22ce'][Math.floor(Math.random() * 4)];
+                this.color = ['#a855f7', '#c084fc', '#ec4899', '#7e22ce', '#34d399'][Math.floor(Math.random() * 5)];
                 this.alpha = Math.random() * 0.7 + 0.2;
             }
 
@@ -638,15 +711,13 @@
             requestAnimationFrame(animateParticles);
         }
 
-        // Initialize App on Window Load
         window.onload = function () {
             fetchGlobalTime();
             updateCountdown();
             setInterval(updateCountdown, 1000);
-            
-            // Auto re-sync every 3 minutes
             setInterval(fetchGlobalTime, 3 * 60 * 1000);
             
+            updatePiggyUI(); // Initialize piggy bank UI
             initParticles();
             animateParticles();
         };
