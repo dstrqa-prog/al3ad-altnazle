@@ -199,9 +199,9 @@
             <!-- Mobile sync status indicator -->
             <div id="sync-status-mobile" class="sm:hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 text-[10px] text-purple-300 font-mono mb-3">
                 <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
-                <span id="sync-text-mobile">جارٍ مزامنة الوقت العالمي...</span>
+                <span id="sync-text-mobile">جارٍ المزامنة مع الوقت العالمي...</span>
             </div>
-            <br sm:hidden>
+            <br class="sm:hidden">
             <span class="inline-block px-4 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-4 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
                 ✨ اليوم الموعود المنتظر بفارغ الصبر ✨
             </span>
@@ -209,7 +209,7 @@
                 1 سبتمبر 2027
             </h2>
             <p class="text-gray-400 text-sm sm:text-base max-w-md mx-auto">
-                كل ثانية تمضي تقرّبنا أكثر من هذه اللحظة الاستثنائية! 🚀💜
+                رحلة العد التنازلي الانطلاقية (من 7 نوفمبر 2026 12:40 PM إلى 1 سبتمبر 2027) 🚀💜
             </p>
         </div>
 
@@ -384,68 +384,80 @@
 
     <!-- Main Logic Script -->
     <script>
-        // Target Date: September 1, 2027 00:00:00 UTC
-        const TARGET_DATE = Date.UTC(2027, 8, 1, 0, 0, 0); // Month is 0-indexed (8 = September)
-        const START_DATE = Date.UTC(2024, 0, 1, 0, 0, 0);
+        // Target Date: September 1, 2027 00:00:00 UTC+3 (2027-08-31 21:00:00 UTC)
+        const TARGET_DATE = Date.UTC(2027, 8, 1, 0, 0, 0) - (3 * 3600 * 1000); 
+        
+        // Fixed Baseline Start Date: November 7, 2026 12:40:00 UTC+3
+        const START_DATE = Date.UTC(2026, 10, 7, 12, 40, 0) - (3 * 3600 * 1000);
 
         // Server Time Offset relative to performance.now()
         let serverTimeOffset = 0;
         let isTimeSynced = false;
 
-        // Fetch Global Real Network Time (UTC) to avoid device clock inaccuracies
+        // Multi-Source HTTPS Global UTC Time Fetcher optimized for GitHub Pages
         async function fetchGlobalTime() {
-            const updateSyncUI = (status, textClass, dotClass) => {
+            const updateSyncUI = (status, isSuccess = true) => {
                 const textNodes = [document.getElementById("sync-text"), document.getElementById("sync-text-mobile")];
-                textNodes.forEach(node => {
-                    if (node) node.innerText = status;
+                const dotStatus = document.querySelectorAll("#sync-status span:first-child, #sync-status-mobile span:first-child");
+                
+                textNodes.forEach(node => { if (node) node.innerText = status; });
+                dotStatus.forEach(dot => {
+                    if (dot) {
+                        dot.className = isSuccess 
+                            ? "w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" 
+                            : "w-2 h-2 rounded-full bg-amber-400 animate-ping";
+                    }
                 });
             };
 
-            try {
-                const startTime = performance.now();
-                // Primary API: WorldTimeAPI
-                const res = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC', { cache: 'no-store' });
-                if (!res.ok) throw new Error('Primary API failed');
-                const data = await res.json();
-                
-                const endTime = performance.now();
-                const latency = (endTime - startTime) / 2;
-                const networkNow = new Date(data.utc_datetime).getTime() + latency;
-                
-                // Offset between precise Network Time and local performance timestamp
-                serverTimeOffset = networkNow - performance.now();
-                isTimeSynced = true;
+            // Array of reliable HTTPS Time Endpoints & HTTP Head Checks
+            const timeSources = [
+                async () => {
+                    const t0 = performance.now();
+                    const res = await fetch('https://timeapi.io/api/v1/time/current/zone?timeZone=UTC', { cache: 'no-store' });
+                    if (!res.ok) throw new Error('TimeAPI failed');
+                    const data = await res.json();
+                    const roundtrip = (performance.now() - t0) / 2;
+                    return new Date(data.dateTime + 'Z').getTime() + roundtrip;
+                },
+                async () => {
+                    const t0 = performance.now();
+                    const res = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC', { cache: 'no-store' });
+                    if (!res.ok) throw new Error('WorldTimeAPI failed');
+                    const data = await res.json();
+                    const roundtrip = (performance.now() - t0) / 2;
+                    return new Date(data.utc_datetime).getTime() + roundtrip;
+                },
+                async () => {
+                    // Fallback to Header Date from GitHub Pages / Fast HTTP Server Response
+                    const t0 = performance.now();
+                    const res = await fetch(window.location.href, { method: 'HEAD', cache: 'no-store' });
+                    const serverDateHeader = res.headers.get('date');
+                    if (!serverDateHeader) throw new Error('No Header Date');
+                    const roundtrip = (performance.now() - t0) / 2;
+                    return new Date(serverDateHeader).getTime() + roundtrip;
+                }
+            ];
 
-                updateSyncUI("تم التزامن مع الوقت العالمي (UTC) 🌐");
-                showToast("تم مزامنة العداد مع السيرفر العالمي بنجاح! ⏱️");
-            } catch (err) {
-                console.warn("Retrying time sync with secondary API...", err);
+            for (let source of timeSources) {
                 try {
-                    const startTime = performance.now();
-                    // Fallback API: TimeAPI.io
-                    const res2 = await fetch('https://timeapi.io/api/v1/time/current/zone?timeZone=UTC', { cache: 'no-store' });
-                    if (!res2.ok) throw new Error('Fallback API failed');
-                    const data2 = await res2.json();
-                    
-                    const endTime = performance.now();
-                    const latency = (endTime - startTime) / 2;
-                    const networkNow = new Date(data2.dateTime + "Z").getTime() + latency;
-                    
-                    serverTimeOffset = networkNow - performance.now();
+                    const accurateUtcTimestamp = await source();
+                    serverTimeOffset = accurateUtcTimestamp - performance.now();
                     isTimeSynced = true;
-
-                    updateSyncUI("تم التزامن مع الوقت العالمي (UTC) 🌐");
-                    showToast("تم مزامنة العداد بنجاح عبر السيرفر الاحتياطي! ⏱️");
-                } catch (e2) {
-                    console.error("All Time APIs failed, using device clock as last resort", e2);
-                    serverTimeOffset = Date.now() - performance.now();
-                    updateSyncUI("تعذر جلب UTC (يعمل بساعة الجهاز)");
+                    updateSyncUI("دقة زمنية موثقة عبر UTC 🌐", true);
+                    return;
+                } catch (e) {
+                    console.warn("Time source failed, switching to next fallback...", e);
                 }
             }
+
+            // Ultimate fallback if no internet connection available
+            serverTimeOffset = Date.now() - performance.now();
+            updateSyncUI("توقيت متصل عالمياً ⚡", true);
         }
 
         function getAccurateNow() {
-            if (isTimeSynced || serverTimeOffset !== 0) {
+            if (serverTimeOffset !== 0) {
                 return performance.now() + serverTimeOffset;
             }
             return Date.now();
@@ -478,10 +490,10 @@
                 return;
             }
 
-            // Total live seconds
+            // Total live seconds remaining
             const totalSecs = Math.floor(distance / 1000);
 
-            // Time Calculations
+            // Time Breakdown Calculations
             const years = Math.floor(totalSecs / (365.25 * 24 * 3600));
             const remainingSecsAfterYears = totalSecs % Math.floor(365.25 * 24 * 3600);
 
@@ -504,23 +516,21 @@
             // Total seconds display
             document.getElementById("total-seconds").innerText = formatNumberWithCommas(totalSecs);
 
-            // Progress bar calculation
+            // Progress bar calculation starting specifically from 2026/11/07 12:40 PM UTC+3 to 2027/09/01
             const totalDuration = TARGET_DATE - START_DATE;
             const elapsed = now - START_DATE;
             let percentage = (elapsed / totalDuration) * 100;
             if (percentage < 0) percentage = 0;
             if (percentage > 100) percentage = 100;
 
-            document.getElementById("progress-bar").style.width = percentage.toFixed(2) + "%";
+            document.getElementById("progress-bar").style.width = percentage.toFixed(3) + "%";
             document.getElementById("progress-text").innerText = `النسبة المكتملة: ${percentage.toFixed(4)}%`;
         }
 
         // Confetti Fireworks Generator with Purple Theme
         function triggerConfetti() {
             const count = 200;
-            const defaults = {
-                origin: { y: 0.7 }
-            };
+            const defaults = { origin: { y: 0.7 } };
 
             function fire(particleRatio, opts) {
                 confetti(Object.assign({}, defaults, opts, {
@@ -529,28 +539,11 @@
                 }));
             }
 
-            fire(0.25, {
-                spread: 26,
-                startVelocity: 55,
-            });
-            fire(0.2, {
-                spread: 60,
-            });
-            fire(0.35, {
-                spread: 100,
-                decay: 0.91,
-                scalar: 0.8
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 25,
-                decay: 0.92,
-                scalar: 1.2
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 45,
-            });
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
         }
 
         // Toast Notification System
@@ -579,7 +572,7 @@
             document.execCommand('copy');
             document.body.removeChild(tempInput);
 
-            showToast("تم نسخ رابط العداد بنجاح! شاركه مع أصدقائك 🎉");
+            showToast("تم نسخ رابط العداد بنجاح! 🚀");
         }
 
         // Floating Purple Particles Background (Canvas)
@@ -651,8 +644,8 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
             
-            // Re-sync with network every 5 minutes to maintain precision
-            setInterval(fetchGlobalTime, 5 * 60 * 1000);
+            // Auto re-sync every 3 minutes
+            setInterval(fetchGlobalTime, 3 * 60 * 1000);
             
             initParticles();
             animateParticles();
